@@ -1,0 +1,86 @@
+% Homework template for Algorithm Analysis and Design
+% UPDATE: September 20, 2019 by Xu Rongchen
+\documentclass[a4paper]{article}
+\usepackage{ctex}
+\ctexset{
+proofname = \heiti{证明} %% set proof name
+}
+\usepackage{amsmath, amssymb, amsthm}
+% amsmath: equation*, amssymb: mathbb, amsthm: proof
+\usepackage{moreenum}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs} % toprule
+\usepackage[mathcal]{eucal}
+
+\usepackage[thehwcnt = 3]{iidef} % set homework count
+\usepackage{longtable}
+
+
+\thecoursename{高等计算机网路}
+\theterm{2020年秋季学期}
+\hwname{论文阅读}
+\slname{\heiti{解}}
+\begin{document}
+\courseheader
+\theusername{徐荣琛}
+\thestuno{2019214518}
+\theinstitute{软件学院}
+
+\info
+
+
+  
+  % \setlength{\itemsep}{3\parskip}
+  %% Homework Start here:
+  %% \item to enumerate the problem ID: Format as 'HomeworkID.ProblemID'
+  %% \begin{solution} XXXX \end{solution} is to make a solution
+  %% \begin{proof} XXXX \end{proof} is to make a proof
+  %% Suggest to use \input{path} command
+\vspace{-15pt}
+\begin{center}
+  \begin{tabular}{c|c} \toprule
+    \textbf{专题} &路由协议安全 \\\midrule
+    \textbf{题目} &Routing Around Congestion Defeating DDoS Attacks and \\& Adverse Network Conditions via Reactive BGP Routing\\
+    \textbf{作者} &Jared M. Smith, Max Schuchard\\
+    \textbf{会议} &2018 IEEE Symposium on Security and Privacy\\\bottomrule
+  \end{tabular}
+\end{center}
+  
+\vspace{20pt}
+\setlength{\parindent}{2em}
+本篇论文的主要工作是提出了一种在DDoS攻击（包括Transit-link DDoS攻击）下可以保障关键自治系统流量的技术——路由阻塞绕行（Routing Around Congestion）。
+路由阻塞绕行通过伪造环路信息，毒化部分受到攻击或者保障链路附近的自治系统，进而产生一条
+来自关键自治系统的流量路径，这一过程称为欺诈性路线反向中毒（Fraudulent Route Reverse Poisoning，简称FRRP）。
+对于FRRP路径，文章提出了两种策略削弱对其他自治系统带来的副作用影响，并随后讨论了基于
+丢包率的FRRP路径择优策略。
+
+文章使用了大量的篇幅进行了实验评估，实验是基于一个模拟环境进行的，模拟过程考虑到实际网络架构、
+带宽、僵尸网络模型、攻击方法等因素，从多个角度论证了路由阻塞绕行技术可以有效地进行对关键自治系统
+在DDoS下关键流量的保障能力。
+
+总体来看，文章具有以下的突出点：
+\begin{itemize}
+  \item 首次显著地改善了Transit-link DDoS攻击造成的链路影响；
+  \item 提出的路由阻塞绕行具备良好的推广性，因为其只需要部署在服务器端；
+  \item 较为充分的实验论证，从理论的角度论证了路由阻塞绕行的可行性以及理想情况下的突出效果。
+\end{itemize}
+
+另一方面，个人以为本文还存在着一定的改良空间：
+\begin{itemize}
+  \item 实验仅是基于了一个模拟的环境进行，虽然模拟环境考虑到了实际网络架构、带宽、僵尸网络模型、攻击方法等多方面的因素，
+  但是相较于实际互联网而言，仍然是非常理想和简单化的。包括实际互联网之中的协议以及对应协议的实现规则、运营商规则等因素对
+  路由阻塞绕行的可行性提出了非常大的挑战，后续2019年IEEE Symposium on Security and Privacy中的论文On the Feasibility of Rerouting-based DDoS Defenses
+  对此也进行了广泛的讨论和分析；
+  \item 另外个人对论文中的FRRP路径择优也存在着一定的别的观点，因为在FRRP路径择优的过程之中，需要多次
+  尝试不同的毒化目标，大量的尝试可能需要非常长的网络收敛时间，这实际可能导致择优结果的实时性不强，进而导致实际之中的不可用性。
+\end{itemize}
+
+总的而言，文章提出了一种DDoS攻击下关键流量保障的新思路，并且这个新思路在理论上具备一定的可行性。虽然根据最新的文献阅读，
+其实际的可行性并不太高，但这样的新思路对于后续的攻击防范设计还是有种非常好的启发式作用，值得更多的研究和讨论。
+
+\end{document}
